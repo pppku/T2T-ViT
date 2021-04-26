@@ -32,7 +32,7 @@ from timm.optim import create_optimizer
 from timm.scheduler import create_scheduler
 from timm.utils import ApexScaler, NativeScaler
 
-torch.backends.cudnn.benchmark = True
+torch.backends.cudnn.benchmark = True                        # 利用cudnn优化加速
 _logger = logging.getLogger('train')
 
 # The first arg parser parses out only the --config argument, this argument is used to
@@ -487,6 +487,12 @@ def main():
         pin_memory=args.pin_mem,
         use_multi_epochs_loader=args.use_multi_epochs_loader
     )
+
+    # # Debug
+    # for load in loader_train:
+    #     # print("len(loader_train) : {}".format(len(loader_train)))
+    #     print("load.shape : {}".format(load[1]))
+    #     # print(load)
 
     eval_dir = os.path.join(args.data, 'val')
     if not os.path.isdir(eval_dir):

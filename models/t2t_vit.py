@@ -82,10 +82,14 @@ class T2T_module(nn.Module):
     def forward(self, x):
         # step0: soft split
         x = self.soft_split0(x).transpose(1, 2)
+        print("self.soft_split0(x).transpose(1, 2) : {}".format(x.shape))
+        # torch.Size([64, 3136, 147])
 
         # iteration1: re-structurization/reconstruction
         x = self.attention1(x)
         B, new_HW, C = x.shape
+        # print("self.attention1(x).shape : {}".format(x.shape))
+        # torch.Size([10, 3136, 64])
         x = x.transpose(1,2).reshape(B, C, int(np.sqrt(new_HW)), int(np.sqrt(new_HW)))
         # iteration1: soft split
         x = self.soft_split1(x).transpose(1, 2)
@@ -154,6 +158,8 @@ class T2T_ViT(nn.Module):
 
     def forward_features(self, x):
         B = x.shape[0]
+        # print("forward_features.shape : {}".format(x.shape))
+        # forward_features.shape : torch.Size([64, 3, 224, 224])
         x = self.tokens_to_token(x)
 
         cls_tokens = self.cls_token.expand(B, -1, -1)
@@ -168,6 +174,7 @@ class T2T_ViT(nn.Module):
         return x[:, 0]
 
     def forward(self, x):
+        print("forward.input.shape : {}".format(x.shape))
         x = self.forward_features(x)
         x = self.head(x)
         return x
