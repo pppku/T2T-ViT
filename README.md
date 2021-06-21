@@ -58,22 +58,25 @@ data prepare: ImageNet with the following folder structure, you can extract imag
 
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 5.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar)| 
-| T2T-ViT-19   |  Performer  |   81.9   |  39.2M  | 8.9G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.9_T2T_ViT_19.pth.tar)| 
-| T2T-ViT-24   |  Performer  |   82.3   |  64.1M  | 14.1G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.3_T2T_ViT_24.pth.tar)| 
-| T2T-ViT-14, 384   |  Performer  |   83.3   |  21.7M  |   | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/83.3_T2T_ViT_14.pth.tar)| 
+| T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 4.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar)| 
+| T2T-ViT-19   |  Performer  |   81.9   |  39.2M  | 8.5G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.9_T2T_ViT_19.pth.tar)| 
+| T2T-ViT-24   |  Performer  |   82.3   |  64.1M  | 13.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.3_T2T_ViT_24.pth.tar)| 
+| T2T-ViT-14, 384   |  Performer  |   83.3   |  21.7M  |   | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/83.3_T2T_ViT_14.pth.tar)|
+| T2T-ViT-24, Token Labeling   |  Performer  |   84.2   |  65M  |   | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/84.2_T2T_ViT_24.pth.tar)| 
 | T2T-ViT_t-14 | Transformer |   81.7   |  21.5M  | 6.1G | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.7_T2T_ViTt_14.pth.tar)  | 
 | T2T-ViT_t-19 | Transformer |   82.4   |  39.2M  | 9.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.4_T2T_ViTt_19.pth.tar) | 
 | T2T-ViT_t-24 | Transformer |   82.6   |  64.1M  | 15.0G| [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.6_T2T_ViTt_24.pth.tar) | 
 
 The 'T2T-ViT-14, 384' means we train T2T-ViT-14 with image size of 384 x 384.
 
+The 'T2T-ViT-24, Token Labeling' means we train T2T-ViT-24 with [Token Labeling](https://github.com/zihangJiang/TokenLabeling).
+
 The three lite variants of T2T-ViT (Comparing with MobileNets):
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar)| 
-| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar)| 
-| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
+| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.1G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar)| 
+| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.5G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar)| 
+| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 1.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
 
 
 ### Usage
@@ -83,10 +86,10 @@ from models.t2t_vit import *
 from utils import load_for_transfer_learning 
 
 # create model
-model = T2t_vit_14()
+model = t2t_vit_14()
 
-# load the preatrained weights
-load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset
+# load the pretrained weights
+load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset, can work for different image size as we interpolate the position embeding for different image size.
 ```
 
 
@@ -94,10 +97,10 @@ load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, str
 
 Test the T2T-ViT-14 (take Performer in T2T module),
 
-Download the [T2T-ViT-14](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-14](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 The results look like:
 
@@ -112,15 +115,15 @@ Top-1 accuracy of the model is: 81.5%
 
 Test the three lite variants: T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 (take Performer in T2T module),
 
-Download the [T2T-ViT-7](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4nfl6HErgdjJ/view?usp=sharing), [T2T-ViT-10](https://drive.google.com/file/d/11v9UdXx_jw7E-lIO26MI9c29ANC2GUgw/view?usp=sharing) or [T2T-ViT-12](https://drive.google.com/file/d/1RnPvXX6HFdQ3O6B6WM1t8_SDDVBIeV6c/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-7](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar), [T2T-ViT-10](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar) or [T2T-ViT-12](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 
 Test the model T2T-ViT-14, 384 with 83.3\% top-1 accuracy: 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 --img-size 384 -b 100 --eval_checkpoint path/to/T2T-ViT-14-384 
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_14 --img-size 384 -b 100 --eval_checkpoint path/to/T2T-ViT-14-384 
 ```
 
 
@@ -131,21 +134,25 @@ Train the three lite variants: T2T-ViT-7, T2T-ViT-10 and T2T-ViT-12 (take Perfor
 If only 4 GPUs are available,
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model t2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 The top1-acc in 4 GPUs would be slightly lower than 8 GPUs (around 0.1%-0.3% lower).
 
 If 8 GPUs are available: 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 
-Train the T2T-ViT-14 and T2T-ViT_t-14:
+Train the T2T-ViT-14 and T2T-ViT_t-14 (run on 4 or 8 GPUs):
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model t2t_vit_14 -b 128 --lr 1e-3 --weight-decay .05 --amp --img-size 224
+```
+
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
 If you want to train our T2T-ViT on images with 384x384 resolution, please use '--img-size 384'.
 
@@ -153,15 +160,15 @@ If you want to train our T2T-ViT on images with 384x384 resolution, please use '
 Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
 ```
 
 ## 5. Transfer T2T-ViT to CIFAR10/CIFAR100
 
 | Model        |  ImageNet | CIFAR10 |  CIFAR100| #params| 
 | :---         |    :---:  | :---:   |  :---:   |   :---:  | 
-| T2T-ViT-14   |   81.5    |[97.5](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-14_97.5.pth)  | [88.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cirfar100_t2t-vit-14_88.4.pth) | 21.5M    | 
-| T2T-ViT-19   |   81.9    |[98.3](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-19_98.3.pth)  | [89.0](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar100_t2t-vit-19_89.0.pth) |39.2M     | 
+| T2T-ViT-14   |   81.5    |[98.3](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit_14_98.3.pth)  | [88.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cirfar100_t2t-vit-14_88.4.pth) | 21.5M    | 
+| T2T-ViT-19   |   81.9    |[98.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit_19_98.4.pth)  | [89.0](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar100_t2t-vit-19_89.0.pth) |39.2M     | 
 
 We resize CIFAR10/100 to 224x224 and finetune our pretrained T2T-ViT-14/19 to CIFAR10/100 by running:
 
